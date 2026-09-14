@@ -7,12 +7,12 @@
 int check_guess(int player_num, int pc_num) {
     bool win = false;
     if(player_num > pc_num) {
-        std::cout << "Nuh uh, my number is lower. ▼" << std::endl;
+        std::cout << "Nuh uh, my number is . . . lower. ▼" << std::endl;
         win = false;
         return win;
     }
     else if(player_num < pc_num) {
-        std::cout << "Nope, my number is GREATER. ▲" << std::endl;
+        std::cout << "Nope, my number is . . . GREATER. ▲" << std::endl;
         win = false;
         return win;
     }
