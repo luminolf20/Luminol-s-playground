@@ -6,7 +6,7 @@
 
 
 
-int game() {
+void game() {
     // introducing and initialization
     std::cout << "NUMBER GUESSING GAME (1-100)" << std::endl;
     std::cout << "Initialization. . .";
@@ -39,7 +39,7 @@ int game() {
         // game logic
         if(check_input(players_number)) {
             win_flag = check_guess(players_number, pc_number);
-        }
+        } 
         else {
             emotions(emotion_flag, silly_counter, anger_counter);
             if(emotion_flag == true) {
