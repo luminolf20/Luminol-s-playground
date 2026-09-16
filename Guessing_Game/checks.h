@@ -4,25 +4,22 @@
 // int check_guess(int player_num, int pc_num)
 // int check_input(int input)
 
-int check_guess(int player_num, int pc_num) {
+bool check_guess(int player_num, int pc_num) {
     bool win = false;
     if(player_num > pc_num) {
         std::cout << "Nuh uh, my number is . . . lower. ▼" << std::endl;
-        win = false;
-        return win;
+        return false;
     }
     else if(player_num < pc_num) {
         std::cout << "Nope, my number is . . . GREATER. ▲" << std::endl;
-        win = false;
-        return win;
+        return false;
     }
     else if (player_num == pc_num){
-        win = true;
-        return win;
+        return true;
     }
 }
 
-int check_input(int input){
+bool check_input(int input){
     if(input >= 1 && input <= 100){
         return true;
     }
