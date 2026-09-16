@@ -1,26 +1,24 @@
 #pragma once
 #include <random>
+#include <chrono>
 
-// TODO
-/* Rebuild the logic of the generator.
-Now it's generating only one random
-number per device.*/
 
 int random_int(){
-    std::random_device rd;  // 1
-    std::mt19937 gen(rd());  // 2
-    std::uniform_int_distribution<int> distrib(1, 100);  // 3
+    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    std::mt19937 gen(static_cast<unsigned int>(seed));
+    std::uniform_int_distribution<> distrib(1, 100);
+    
     int random_number = distrib(gen);  // 4
     return random_number;
 }
-
 
 
 // КОММЕНТАРИИ
 
 // 1
 /* Получаем сид для генерации случайнного 
-    числа с устройства и записываем в объект-генератор rd,
+    числа с устройства в качестве времени с точностью до 
+    милисекунд и записываем в объект-генератор rd,
     который после своего вызова как функции вернёт на
     место вызова сид */
 
