@@ -25,7 +25,7 @@ Shape &Shape::operator=(const Shape &other)  // Оператору не нуже
         Shape shape(other);  // Создаём временную копию "правого" объекта other
         std::swap(name_, shape.name_);  // меняем местами данные в объектах
     }  // shape будет удалён автоматически
-    return *this;  // Возвращаем ссылку на текущий "левый" объект объект
+    return *this;  // Возвращаем ссылку на текущий "левый" объект
 }
 
 Shape::Shape(Shape &&other) noexcept : name_(std::move(other.name_)) {}
@@ -41,12 +41,12 @@ const std::string &Shape::getName() const
     return name_;  // Возвращаем имя фигуры через ссылку на него
 }
 
-double Shape::area() const 
+double Shape::area() const
 {
     return 0.0;  // Заглушка
 }
 
-double Shape::perimeter() const 
+double Shape::perimeter() const
 {
     return 0.0;  // Заглушка
 }
