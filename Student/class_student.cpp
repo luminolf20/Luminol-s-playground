@@ -6,7 +6,7 @@
 
 Student::Student() : name_("Empty"), group_("Unsigned"), marks_{} {}
 
-// Student::Student(std::string name) : name_(name), group_("Unsigned"), marks_{} {}
+Student::Student(std::string name) : name_(name), group_("Unsigned"), marks_{} {}
 
 Student::Student(std::string name, std::string group)
     : name_(name), group_(group), marks_{} {}
@@ -89,7 +89,7 @@ std::ostream &operator<<(std::ostream &os, const Student &student)
     os << "Student's group: " << student.group_ << std::endl;
 
     os << "Student's marks: ";
-    for (int mark : student.marks_)
+    for (int mark : student.getMarks())
     {  os << mark << ", ";  }
     os << std::endl;
 

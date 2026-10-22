@@ -31,6 +31,3 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Student& student);
     friend bool operator<(const Student& lhs, const Student& rhs);
 };
-
-std::ostream& operator<<(std::ostream& os, const Student& student);
-bool operator<(const Student& lhs, const Student& rhs);

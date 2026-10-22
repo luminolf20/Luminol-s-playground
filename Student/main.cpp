@@ -29,7 +29,7 @@ int main() {
     std::sort(students.begin(), students.end(), [](const Student& lhs, const Student& rhs) {  return !(lhs < rhs);  });
 
     std::cout << "Список после сортировки (по убыванию ср. балла):" << std::endl;
-    for (const auto& student : students) {
+    for (const Student& student : students) {
         std::cout << student << "\n";
     }
 
