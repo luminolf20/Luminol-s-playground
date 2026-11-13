@@ -16,7 +16,14 @@ vector<T, A>::vector(int s) : sz{s}, elem{new T[s]}, space{s} // Констук�
 
 /* Деструктор (конструктор разрушения) */
 template <typename T, typename A>
-vector<T, A>::~vector() { delete[] elem; } // Особождает динмическую память (кучу/heap) от вектора
+vector<T, A>::~vector()
+{
+    for (int i = 0; i < sz; ++i)
+    {
+        alloc.destroy(&elem[i]);
+    }
+    alloc.deallocate(elem, space);
+} // Особождает динмическую память (кучу/heap) от вектора
 
 /* Констуктор копирования */
 template <typename T, typename A>
@@ -40,9 +47,13 @@ vector<T, A> &vector<T, A>::operator=(const vector &a)
 
     if (a.sz <= space) // Памяти достаточно, новая не нужна
     {
+        for (int i = 0; i < sz; ++i)
+        {
+            alloc.deallocate(&elem[i]);
+        }
         for (int i = 0; i < a.sz; ++i)
         {
-            elem[i] = a.elem[i];
+            alloc.construct(&elem[i]);
         }
         sz = a.sz;
         return *this;
@@ -72,16 +83,21 @@ vector<T, A>::vector(vector &&a) : sz{a.sz}, space{a.space}, elem{a.elem}
 
 /* Оператор присваивания перемещением */
 template <typename T, typename A>
-vector<T, A> &vector<T, A>::operator=(vector &&a)
+vector<T, A> &vector<T, A>::operator=(vector &&a) noexcept
 {
-    if (this == &a)
-        return *this;
+    for (int i = 0; i < sz; ++i)
+    {
+        alloc.deallocate(&elem[i]);
+    }
+    alloc.deallocate(elem, space);
 
-    delete[] elem;    // Удаляем старые данные вектора
-    elem = a.elem;    // Переносим данные из старого вектора в новый с помощью перенапраления указателя
     sz = a.sz;        // Делаем новому вектору такой же размер
-    a.elem = nullptr; // Обнуляем старый указатель
+    elem = a.elem;
+    space = a.space;
+
     a.sz = 0;         // Обнуляем старый размер
+    a.elem = nullptr; // Обнуляем старый указатель
+    a.space = 0;
     return *this;
 }
 // Старый вектор опустошён, а новый имеет его данные
